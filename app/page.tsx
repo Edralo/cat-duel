@@ -4,22 +4,45 @@ import useSWRImmutable from "swr/immutable";
 import Fighter from "./Fighter";
 import { Cat } from "@prisma/client";
 
-type SearchResultData = {
+type fetchDuelData = {
   cats: Array<Cat>;
 }
 
-async function getDuel(url: string) {
-  const duelData = await fetch(url);
-
-  if (!duelData.ok)
-    throw new Error("Failed fetching search data");
-
-  const json: SearchResultData = await duelData.json();
-
-  return json.cats;
+type sendVoteData = {
+  cat: Cat
 }
 
 export default function Home() {
+
+  async function getDuel(url: string) {
+    const duelData = await fetch(url);
+  
+    if (!duelData.ok)
+      throw new Error("Failed fetching search data");
+  
+    const json: fetchDuelData = await duelData.json();
+  
+    return json.cats;
+  }
+
+  async function handleVote(winnerCat: Cat) {
+    const winnerID = winnerCat.id;
+    const loserID = data?.filter((cat) => cat.id !== winnerID)[0].id;
+
+    const sendVote = await fetch('/api/duel', {
+      method:'POST',
+      body: JSON.stringify({
+        winner : winnerID,
+        loser : loserID
+      })
+    });
+
+    if (!sendVote.ok)
+      throw new Error("Failed sending vote data");
+
+    return window.location.reload();
+  }
+
   const { data, isLoading } = useSWRImmutable(
     '/api/duel',
     (url) => getDuel(url),
@@ -35,9 +58,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col md:flex-row w-screen content-around md:justify-around items-center">
-      <Fighter cat={data[0]} />
+      <Fighter cat={data[0]} handleVote={handleVote}/>
       <div className="text-5xl">VS</div>
-      <Fighter cat={data[1]} />
+      <Fighter cat={data[1]} handleVote={handleVote}/>
     </div>
   );
 }
