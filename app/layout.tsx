@@ -19,8 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="min-h-screen flex flex-col items-center">
-        <header className="flex h-28 items-center">
+        <header className="flex flex-col h-28 items-center justify-around">
           <h1 className="font-bold">Cat Duel</h1>
+          <h2>Who's the cutest?</h2>
         </header>
         <main className="flex flex-grow flex-col justify-center">
           {children}
