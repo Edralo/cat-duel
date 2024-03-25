@@ -1,53 +1,26 @@
-'use client'
-
-import useSWRImmutable from "swr/immutable";
-import { Cat } from "@prisma/client";
+import prisma from "@/lib/db";
 import CatProfile from "./CatProfile";
 import Link from "next/link";
-import { Button } from "@material-tailwind/react";
 
-type fetchAllCatsData = {
-  cats: Array<Cat>;
-}
-
-export default function Ranking() {
-
-  async function getAllCats(url: string) {
-    const duelData = await fetch(url);
-  
-    if (!duelData.ok)
-      throw new Error("Failed fetching search data");
-  
-    const json: fetchAllCatsData = await duelData.json();
-  
-    return json.cats;
-  }
-
-  const { data, isLoading } = useSWRImmutable(
-    '/api/ranking',
-    (url) => getAllCats(url),
-  );
-
-  if (!data || isLoading) {
-    return (
-      <div>
-        Waiting for the cats
-      </div>
-    )
-  }
+export default async function Ranking() {
+  const cats = await prisma.cat.findMany({
+    orderBy: {
+        rating: 'desc'
+    }
+});
 
   return (
     <>
       <h2 className="text-2xl font-bold">Official Cat Ranking</h2>
       <div className="flex flex-grow flex-col items-center">
         <div className="flex flex-wrap justify-around">
-          {data.map((cat, i) => 
+          {cats.map((cat, i) => 
             <CatProfile key={cat.id} cat={cat} place={i + 1} />
           )}
         </div>
       </div>
-      <Link href="./">
-        <Button>Go back to voting</Button>
+      <Link href="./" className="p-2 m-1 border-4 border-gray-900 bg-gray-900 rounded-lg text-white text-sm">
+        GO BACK TO VOTING
       </Link>
     </>
   );
