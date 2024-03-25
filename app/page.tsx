@@ -1,15 +1,12 @@
 'use client';
 
 import useSWRImmutable from "swr/immutable";
-import Fighter from "./Fighter";
 import { Cat } from "@prisma/client";
+import Fighter from "./Fighter";
+import Link from "next/link";
 
 type fetchDuelData = {
   cats: Array<Cat>;
-}
-
-type sendVoteData = {
-  cat: Cat
 }
 
 export default function Home() {
@@ -57,10 +54,16 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-screen content-around md:justify-around items-center">
-      <Fighter cat={data[0]} handleVote={handleVote}/>
-      <div className="text-5xl">VS</div>
-      <Fighter cat={data[1]} handleVote={handleVote}/>
-    </div>
+    <>
+      <h2 className="text-2xl font-bold">Vote for the cutest cat</h2>
+      <div className="flex flex-grow flex-col md:flex-row w-screen content-around md:justify-around items-center">
+        <Fighter cat={data[0]} handleVote={handleVote}/>
+        <div className="text-5xl">VS</div>
+        <Fighter cat={data[1]} handleVote={handleVote}/>
+      </div>
+      <Link href="/ranking" className="py-1">
+        <button>See the rankings</button>
+      </Link>
+    </>
   );
 }
