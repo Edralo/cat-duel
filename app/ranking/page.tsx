@@ -4,6 +4,7 @@ import useSWRImmutable from "swr/immutable";
 import { Cat } from "@prisma/client";
 import CatProfile from "./CatProfile";
 import Link from "next/link";
+import { Button } from "@material-tailwind/react";
 
 type fetchAllCatsData = {
   cats: Array<Cat>;
@@ -46,7 +47,7 @@ export default function Ranking() {
         </div>
       </div>
       <Link href="./">
-        <button>Go back to voting</button>
+        <Button>Go back to voting</Button>
       </Link>
     </>
   );

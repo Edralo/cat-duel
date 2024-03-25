@@ -4,6 +4,7 @@ import useSWRImmutable from "swr/immutable";
 import { Cat } from "@prisma/client";
 import Fighter from "./Fighter";
 import Link from "next/link";
+import { Button } from "@material-tailwind/react";
 
 type fetchDuelData = {
   cats: Array<Cat>;
@@ -62,7 +63,7 @@ export default function Home() {
         <Fighter cat={data[1]} handleVote={handleVote}/>
       </div>
       <Link href="/ranking" className="py-1">
-        <button>See the rankings</button>
+        <Button>See the rankings</Button>
       </Link>
     </>
   );
