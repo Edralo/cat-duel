@@ -56,7 +56,7 @@ export default function Home() {
   return (
     <>
       <h2 className="text-2xl font-bold">Vote for the cutest cat</h2>
-      <div className="flex flex-grow flex-col md:flex-row w-screen content-around md:justify-around items-center">
+      <div className="flex flex-grow flex-col w-screen justify-around md:flex-row items-center">
         <Fighter cat={data[0]} handleVote={handleVote}/>
         <div className="text-5xl">VS</div>
         <Fighter cat={data[1]} handleVote={handleVote}/>
