@@ -7,7 +7,7 @@ export default async function Ranking() {
     orderBy: {
         rating: 'desc'
     }
-});
+  });
 
   return (
     <>

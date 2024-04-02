@@ -2,7 +2,7 @@
 
 import { Cat } from "@prisma/client";
 import Image from "next/image";
-import { handleVote } from "./actions";
+import { handleVote } from "@/app/actions";
 
 type FighterProps = {
     cat: Cat,
@@ -12,6 +12,7 @@ type FighterProps = {
 export default function Fighter({cat, cats}: FighterProps) {
     return (
         <Image
+            priority={true}
             src={cat.imgUrl}
             width={500}
             height={500}
