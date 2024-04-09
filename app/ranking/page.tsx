@@ -19,7 +19,7 @@ export default async function Ranking() {
           )}
         </div>
       </div>
-      <Link href="./" className="p-2 m-1 border-4 border-gray-900 bg-gray-900 rounded-lg text-white text-sm">
+      <Link role="button" href="./" className="p-2 m-1 border-4 border-gray-900 bg-gray-900 rounded-lg text-white text-sm">
         GO BACK TO VOTING
       </Link>
     </>

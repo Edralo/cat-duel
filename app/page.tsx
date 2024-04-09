@@ -16,7 +16,7 @@ export default async function Home() {
         <div className="text-5xl">VS</div>
         <Fighter cat={cats[1]} cats={cats}/>
       </form>
-      <Link href="/ranking" className="p-2 m-1 border-4 border-gray-900 bg-gray-900 rounded-lg text-white text-sm">
+      <Link role="button" href="/ranking" className="p-2 m-1 border-4 border-gray-900 bg-gray-900 rounded-lg text-white text-sm">
         SEE THE RANKINGS
       </Link>
     </>
